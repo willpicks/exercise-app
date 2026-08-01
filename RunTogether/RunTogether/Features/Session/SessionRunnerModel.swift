@@ -66,15 +66,26 @@ final class SessionRunnerModel {
 
         // Recorded at real wall-clock time even when the debug clock is
         // accelerated, so a 60x test session never claims a real workout.
-        if let log {
-            let record = SessionRecord(
-                kind: kind,
-                stage: stage,
-                participantIDs: participantIDs,
-                startedAt: now
+        let record = SessionRecord(
+            kind: kind,
+            stage: stage,
+            participantIDs: participantIDs,
+            startedAt: now
+        )
+        recordID = record.id
+        log?.begin(record)
+
+        // Only hand off real-time sessions. A 60x debug run would have the
+        // Watch buzzing every second for no reason.
+        if speedMultiplier == 1 {
+            WatchBridge.shared.send(
+                SessionHandoff(
+                    sessionID: record.id,
+                    startedAt: now,
+                    stage: stage,
+                    track: track
+                )
             )
-            recordID = record.id
-            log.begin(record)
         }
 
         cues.activate()
@@ -103,9 +114,12 @@ final class SessionRunnerModel {
     /// one. Closing early matters: an abandoned four-minute session must not go
     /// looking for a thirty-minute workout to claim.
     private func finishRecord(ranToCompletion: Bool) {
-        guard let log, let recordID else { return }
+        guard let recordID else { return }
         self.recordID = nil
-        log.finish(id: recordID, at: Date(), ranToCompletion: ranToCompletion)
+        log?.finish(id: recordID, at: Date(), ranToCompletion: ranToCompletion)
+        if speedMultiplier == 1 {
+            WatchBridge.shared.sendStop(sessionID: recordID)
+        }
     }
 
     // MARK: Tick

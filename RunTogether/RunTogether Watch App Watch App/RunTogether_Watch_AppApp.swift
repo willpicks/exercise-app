@@ -11,7 +11,7 @@ import SwiftUI
 struct RunTogether_Watch_App_Watch_AppApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            WatchSessionView()
         }
     }
 }

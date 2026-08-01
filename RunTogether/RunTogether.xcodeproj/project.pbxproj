@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		BE96E875301DFB7400621B2F /* RunTogether Watch App Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = BE96E86B301DFB7200621B2F /* RunTogether Watch App Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		BEF971D0301DE946004BDE78 /* RunTogetherKit in Frameworks */ = {isa = PBXBuildFile; productRef = BEF971CF301DE946004BDE78 /* RunTogetherKit */; };
+		BE96E891301DFB7400621B2F /* RunTogetherKit in Frameworks */ = {isa = PBXBuildFile; productRef = BE96E890301DFB7400621B2F /* RunTogetherKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		BE96E868301DFB7200621B2F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			files = (
+				BE96E891301DFB7400621B2F /* RunTogetherKit in Frameworks */,
 			);
 		};
 		BEF971BD301DE883004BDE78 /* Frameworks */ = {
@@ -114,6 +116,9 @@
 				BE96E86C301DFB7200621B2F /* RunTogether Watch App Watch App */,
 			);
 			name = "RunTogether Watch App Watch App";
+			packageProductDependencies = (
+				BE96E890301DFB7400621B2F /* RunTogetherKit */,
+			);
 			productName = "RunTogether Watch App Watch App";
 			productReference = BE96E86B301DFB7200621B2F /* RunTogether Watch App Watch App.app */;
 			productType = "com.apple.product-type.application";
@@ -248,7 +253,7 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 27.0;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
 			};
 			name = Debug;
 		};
@@ -281,7 +286,7 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 27.0;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
 			};
 			name = Release;
 		};
@@ -512,6 +517,10 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		BEF971CF301DE946004BDE78 /* RunTogetherKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RunTogetherKit;
+		};
+		BE96E890301DFB7400621B2F /* RunTogetherKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = RunTogetherKit;
 		};
