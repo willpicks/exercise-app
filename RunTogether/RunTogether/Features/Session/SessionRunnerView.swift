@@ -114,10 +114,9 @@ struct SessionRunnerView: View {
 }
 
 #Preview {
-    let me = RunnerStore.defaultMe
-    return SessionRunnerView(
-        plan: SessionComposer.soloPlan(for: me),
-        runnerID: me.id,
+    SessionRunnerView(
+        plan: SessionComposer.soloPlan(for: RunnerStore.defaultMe),
+        runnerID: RunnerStore.defaultMe.id,
         speedMultiplier: 60
     )
 }
