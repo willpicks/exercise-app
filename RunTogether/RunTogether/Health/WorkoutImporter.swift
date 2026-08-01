@@ -116,8 +116,8 @@ final class WorkoutImporter {
         observedLog = log
         observedRunnerID = runnerID
 
-        reader.startObserving { [weak self] in
-            Task { @MainActor in
+        reader.startObserving {
+            Task { @MainActor [weak self] in
                 guard let self,
                       let log = self.observedLog,
                       let runnerID = self.observedRunnerID

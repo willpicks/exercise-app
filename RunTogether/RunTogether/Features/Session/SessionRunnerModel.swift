@@ -92,8 +92,8 @@ final class SessionRunnerModel {
 
         // Fine enough that accelerated runs don't skip past whole segments.
         let interval = min(0.25, 1.0 / speedMultiplier)
-        let timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { [weak self] _ in
-            Task { @MainActor in self?.tick() }
+        let timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { _ in
+            Task { @MainActor [weak self] in self?.tick() }
         }
         RunLoop.main.add(timer, forMode: .common)
         self.timer = timer

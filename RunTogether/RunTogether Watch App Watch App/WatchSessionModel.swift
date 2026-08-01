@@ -23,11 +23,14 @@ final class WatchSessionModel {
     @ObservationIgnored private var hasPlayedCompletion = false
 
     func activate() {
-        receiver.onSession = { [weak self] handoff in
-            Task { @MainActor in self?.begin(handoff) }
+        // The capture list belongs on the Task rather than the outer closure:
+        // referencing a captured `self` from nested concurrent code is an
+        // error under the Swift 6 language mode.
+        receiver.onSession = { handoff in
+            Task { @MainActor [weak self] in self?.begin(handoff) }
         }
-        receiver.onStop = { [weak self] in
-            Task { @MainActor in self?.end() }
+        receiver.onStop = {
+            Task { @MainActor [weak self] in self?.end() }
         }
         receiver.activate()
     }
@@ -44,8 +47,8 @@ final class WatchSessionModel {
         hasPlayedCompletion = false
 
         timer?.invalidate()
-        let timer = Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true) { [weak self] _ in
-            Task { @MainActor in self?.tick() }
+        let timer = Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true) { _ in
+            Task { @MainActor [weak self] in self?.tick() }
         }
         RunLoop.main.add(timer, forMode: .common)
         self.timer = timer
