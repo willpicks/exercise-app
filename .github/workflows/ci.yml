@@ -27,3 +27,24 @@ jobs:
 
       - name: Test
         run: swift test --package-path RunTogetherKit
+
+  app:
+    name: RunTogether (iOS)
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Available SDKs
+        run: xcodebuild -showsdks | grep -i ios || true
+
+      # Simulator destination and signing disabled: this job is here to catch
+      # compile errors, not to produce an installable build.
+      - name: Build
+        run: |
+          xcodebuild build \
+            -project RunTogether/RunTogether.xcodeproj \
+            -scheme RunTogether \
+            -destination 'generic/platform=iOS Simulator' \
+            -configuration Debug \
+            CODE_SIGNING_ALLOWED=NO

@@ -11,7 +11,7 @@ import SwiftUI
 struct RunTogetherApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TodayView()
         }
     }
 }

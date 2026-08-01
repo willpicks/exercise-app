@@ -2,9 +2,9 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NsHealthShareUsageDescription</key>
+	<key>NSHealthShareUsageDescription</key>
 	<string>Reads your finished runs so both of you can see them in one place.</string>
-	<key>TSAppUsesNonExemptEncryption</key>
+	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>UIBackgroundModes</key>
 	<array>
