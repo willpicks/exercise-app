@@ -4,7 +4,9 @@ import SwiftUI
 /// The home screen: both ladders side by side, and the two ways to start.
 struct TodayView: View {
 
-    @State private var store = RunnerStore()
+    @Environment(RunnerStore.self) private var store
+    @Environment(SessionLog.self) private var log
+
     @State private var pending: PendingSession?
     /// Debug only. Off in release; at 60 a full session plays out in seconds.
     @State private var accelerate = false
@@ -20,13 +22,15 @@ struct TodayView: View {
                     stageRow(
                         title: "Shared lane",
                         subtitle: pairedStage.summary,
-                        detail: "\(PlanStage.minutes(pairedStage.totalRunSeconds)) running · "
-                            + "\(PlanStage.minutes(pairedStage.totalSeconds)) total"
+                        detail: "\(minutes(pairedStage.totalRunSeconds)) running · "
+                            + "\(minutes(pairedStage.totalSeconds)) total"
                     )
                     Button {
                         pending = PendingSession(
                             plan: SessionComposer.pairedPlan(for: (store.dad, store.me)),
-                            runnerID: store.me.id
+                            runnerID: store.me.id,
+                            kind: .paired,
+                            participantIDs: [store.dad.id, store.me.id]
                         )
                     } label: {
                         Label("Start paired session", systemImage: "figure.run.motion")
@@ -42,7 +46,9 @@ struct TodayView: View {
                     Button {
                         pending = PendingSession(
                             plan: SessionComposer.soloPlan(for: store.me),
-                            runnerID: store.me.id
+                            runnerID: store.me.id,
+                            kind: .solo,
+                            participantIDs: [store.me.id]
                         )
                     } label: {
                         Label("Start my session", systemImage: "figure.run")
@@ -59,12 +65,24 @@ struct TodayView: View {
                 #endif
             }
             .navigationTitle("Run Together")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink {
+                        HistoryView()
+                    } label: {
+                        Label("History", systemImage: "list.bullet.rectangle")
+                    }
+                }
+            }
         }
         .fullScreenCover(item: $pending) { session in
             SessionRunnerView(
                 plan: session.plan,
                 runnerID: session.runnerID,
-                speedMultiplier: accelerate ? 60 : 1
+                speedMultiplier: accelerate ? 60 : 1,
+                log: log,
+                kind: session.kind,
+                participantIDs: session.participantIDs
             )
         }
     }
@@ -76,7 +94,7 @@ struct TodayView: View {
             stageRow(
                 title: "Stage \(runner.currentStage.index + 1) of \(runner.spec.stageCount)",
                 subtitle: runner.currentStage.summary,
-                detail: "\(PlanStage.minutes(runner.currentStage.totalRunSeconds)) running"
+                detail: "\(minutes(runner.currentStage.totalRunSeconds)) running"
             )
 
             if let attribution = runner.spec.governance.attribution() {
@@ -111,6 +129,10 @@ struct TodayView: View {
         }
         .padding(.vertical, 2)
     }
+
+    private func minutes(_ seconds: Int) -> String {
+        "\(Int((Double(seconds) / 60).rounded())) min"
+    }
 }
 
 /// Wrapper so `fullScreenCover(item:)` has something `Identifiable` to hold.
@@ -118,14 +140,12 @@ private struct PendingSession: Identifiable {
     let id = UUID()
     let plan: PairedPlan
     let runnerID: RunnerID
-}
-
-private extension PlanStage {
-    static func minutes(_ seconds: Int) -> String {
-        "\(Int((Double(seconds) / 60).rounded())) min"
-    }
+    let kind: SessionKind
+    let participantIDs: [RunnerID]
 }
 
 #Preview {
     TodayView()
+        .environment(RunnerStore())
+        .environment(SessionLog())
 }

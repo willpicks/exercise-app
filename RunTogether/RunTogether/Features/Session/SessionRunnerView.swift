@@ -9,12 +9,22 @@ struct SessionRunnerView: View {
     @State private var model: SessionRunnerModel
     @Environment(\.dismiss) private var dismiss
 
-    init(plan: PairedPlan, runnerID: RunnerID, speedMultiplier: Double = 1) {
+    init(
+        plan: PairedPlan,
+        runnerID: RunnerID,
+        speedMultiplier: Double = 1,
+        log: SessionLog? = nil,
+        kind: SessionKind = .solo,
+        participantIDs: [RunnerID] = []
+    ) {
         _model = State(
             initialValue: SessionRunnerModel(
                 plan: plan,
                 runnerID: runnerID,
-                speedMultiplier: speedMultiplier
+                speedMultiplier: speedMultiplier,
+                log: log,
+                kind: kind,
+                participantIDs: participantIDs
             )
         )
     }

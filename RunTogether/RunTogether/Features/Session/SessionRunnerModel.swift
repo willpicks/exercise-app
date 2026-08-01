@@ -31,11 +31,26 @@ final class SessionRunnerModel {
     @ObservationIgnored private var lastSpokenOffset: Int?
     @ObservationIgnored private var hasAnnouncedCompletion = false
 
-    init(plan: PairedPlan, runnerID: RunnerID, speedMultiplier: Double = 1) {
+    @ObservationIgnored private let log: SessionLog?
+    @ObservationIgnored private let kind: SessionKind
+    @ObservationIgnored private let participantIDs: [RunnerID]
+    @ObservationIgnored private var recordID: UUID?
+
+    init(
+        plan: PairedPlan,
+        runnerID: RunnerID,
+        speedMultiplier: Double = 1,
+        log: SessionLog? = nil,
+        kind: SessionKind = .solo,
+        participantIDs: [RunnerID] = []
+    ) {
         self.stage = plan.stage
         self.track = plan.track(for: runnerID)
             ?? CueTrack(runnerID: runnerID, segments: SessionTimeline.segments(for: plan.stage))
         self.speedMultiplier = max(1, speedMultiplier)
+        self.log = log
+        self.kind = kind
+        self.participantIDs = participantIDs.isEmpty ? [runnerID] : participantIDs
     }
 
     // MARK: Lifecycle
@@ -48,6 +63,19 @@ final class SessionRunnerModel {
         lastSpokenOffset = nil
         hasAnnouncedCompletion = false
         isRunning = true
+
+        // Recorded at real wall-clock time even when the debug clock is
+        // accelerated, so a 60x test session never claims a real workout.
+        if let log {
+            let record = SessionRecord(
+                kind: kind,
+                stage: stage,
+                participantIDs: participantIDs,
+                startedAt: now
+            )
+            recordID = record.id
+            log.begin(record)
+        }
 
         cues.activate()
 
@@ -66,7 +94,18 @@ final class SessionRunnerModel {
         timer?.invalidate()
         timer = nil
         isRunning = false
+        finishRecord(ranToCompletion: false)
         cues.deactivate()
+    }
+
+    /// Closes the session's window. Idempotent — `stop()` runs on dismiss even
+    /// after a session finished naturally, and the first outcome is the true
+    /// one. Closing early matters: an abandoned four-minute session must not go
+    /// looking for a thirty-minute workout to claim.
+    private func finishRecord(ranToCompletion: Bool) {
+        guard let log, let recordID else { return }
+        self.recordID = nil
+        log.finish(id: recordID, at: Date(), ranToCompletion: ranToCompletion)
     }
 
     // MARK: Tick
@@ -95,6 +134,7 @@ final class SessionRunnerModel {
             timer?.invalidate()
             timer = nil
             isRunning = false
+            finishRecord(ranToCompletion: true)
             // Audio session is left active briefly so the final cue finishes.
         }
     }
