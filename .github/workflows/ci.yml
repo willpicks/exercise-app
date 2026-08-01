@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  engine:
+    name: RunTogetherKit
+    # macOS because the engine is the training logic for an iOS app and should
+    # be verified on the toolchain that will actually ship it.
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Toolchain
+        run: swift --version
+
+      - name: Build
+        run: swift build --package-path RunTogetherKit
+
+      - name: Test
+        run: swift test --package-path RunTogetherKit
