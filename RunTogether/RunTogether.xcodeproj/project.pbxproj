@@ -112,7 +112,7 @@
 			packageReferences = (
 				BEF971CE301DE945004BDE78 /* XCLocalSwiftPackageReference "../RunTogetherKit" */,
 			);
-			preferredProjectObjectVersion = 77;
+			preferredProjectObjectVersion = 100;
 			productRefGroup = BEF971C1301DE883004BDE78 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
