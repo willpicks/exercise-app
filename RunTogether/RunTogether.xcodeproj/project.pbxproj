@@ -7,10 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE96E875301DFB7400621B2F /* RunTogether Watch App Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = BE96E86B301DFB7200621B2F /* RunTogether Watch App Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		BEF971D0301DE946004BDE78 /* RunTogetherKit in Frameworks */ = {isa = PBXBuildFile; productRef = BEF971CF301DE946004BDE78 /* RunTogetherKit */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		BE96E873301DFB7400621B2F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BEF971B8301DE883004BDE78 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BE96E86A301DFB7200621B2F;
+			remoteInfo = "RunTogether Watch App Watch App";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BE96E876301DFB7400621B2F /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolder = Product;
+			files = (
+				BE96E875301DFB7400621B2F /* RunTogether Watch App Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		BE96E86B301DFB7200621B2F /* RunTogether Watch App Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RunTogether Watch App Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEF971C0301DE883004BDE78 /* RunTogether.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RunTogether.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -25,6 +49,11 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		BE96E86C301DFB7200621B2F /* RunTogether Watch App Watch App */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "RunTogether Watch App Watch App";
+			sourceTree = "<group>";
+		};
 		BEF971C2301DE883004BDE78 /* RunTogether */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -36,6 +65,11 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		BE96E868301DFB7200621B2F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+			);
+		};
 		BEF971BD301DE883004BDE78 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			files = (
@@ -49,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				BEF971C2301DE883004BDE78 /* RunTogether */,
+				BE96E86C301DFB7200621B2F /* RunTogether Watch App Watch App */,
 				BEF971C1301DE883004BDE78 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -57,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				BEF971C0301DE883004BDE78 /* RunTogether.app */,
+				BE96E86B301DFB7200621B2F /* RunTogether Watch App Watch App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -64,6 +100,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		BE96E86A301DFB7200621B2F /* RunTogether Watch App Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE96E879301DFB7400621B2F /* Build configuration list for PBXNativeTarget "RunTogether Watch App Watch App" */;
+			buildPhases = (
+				BE96E867301DFB7200621B2F /* Sources */,
+				BE96E868301DFB7200621B2F /* Frameworks */,
+				BE96E869301DFB7200621B2F /* Resources */,
+			);
+			buildRules = (
+			);
+			fileSystemSynchronizedGroups = (
+				BE96E86C301DFB7200621B2F /* RunTogether Watch App Watch App */,
+			);
+			name = "RunTogether Watch App Watch App";
+			productName = "RunTogether Watch App Watch App";
+			productReference = BE96E86B301DFB7200621B2F /* RunTogether Watch App Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
 		BEF971BF301DE883004BDE78 /* RunTogether */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BEF971CB301DE885004BDE78 /* Build configuration list for PBXNativeTarget "RunTogether" */;
@@ -71,8 +125,12 @@
 				BEF971BC301DE883004BDE78 /* Sources */,
 				BEF971BD301DE883004BDE78 /* Frameworks */,
 				BEF971BE301DE883004BDE78 /* Resources */,
+				BE96E876301DFB7400621B2F /* Embed Watch Content */,
 			);
 			buildRules = (
+			);
+			dependencies = (
+				BE96E874301DFB7400621B2F /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				BEF971C2301DE883004BDE78 /* RunTogether */,
@@ -95,6 +153,9 @@
 				LastSwiftUpdateCheck = 2700;
 				LastUpgradeCheck = 2700;
 				TargetAttributes = {
+					BE96E86A301DFB7200621B2F = {
+						CreatedOnToolsVersion = 27.0;
+					};
 					BEF971BF301DE883004BDE78 = {
 						CreatedOnToolsVersion = 27.0;
 					};
@@ -118,11 +179,17 @@
 			projectRoot = "";
 			targets = (
 				BEF971BF301DE883004BDE78 /* RunTogether */,
+				BE96E86A301DFB7200621B2F /* RunTogether Watch App Watch App */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		BE96E869301DFB7200621B2F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+		};
 		BEF971BE301DE883004BDE78 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			files = (
@@ -131,6 +198,11 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		BE96E867301DFB7200621B2F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+			);
+		};
 		BEF971BC301DE883004BDE78 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			files = (
@@ -138,7 +210,81 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		BE96E874301DFB7400621B2F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BE96E86A301DFB7200621B2F /* RunTogether Watch App Watch App */;
+			targetProxy = BE96E873301DFB7400621B2F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		BE96E877301DFB7400621B2F /* Debug configuration for PBXNativeTarget "RunTogether Watch App Watch App" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8H3755VD9M;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "RunTogether Watch App";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.william.RunTogether;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.william.RunTogether.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 27.0;
+			};
+			name = Debug;
+		};
+		BE96E878301DFB7400621B2F /* Release configuration for PBXNativeTarget "RunTogether Watch App Watch App" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8H3755VD9M;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "RunTogether Watch App";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.william.RunTogether;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.william.RunTogether.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 27.0;
+			};
+			name = Release;
+		};
 		BEF971C9301DE885004BDE78 /* Debug configuration for PBXProject "RunTogether" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -331,6 +477,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		BE96E879301DFB7400621B2F /* Build configuration list for PBXNativeTarget "RunTogether Watch App Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE96E877301DFB7400621B2F /* Debug configuration for PBXNativeTarget "RunTogether Watch App Watch App" */,
+				BE96E878301DFB7400621B2F /* Release configuration for PBXNativeTarget "RunTogether Watch App Watch App" */,
+			);
+			defaultConfigurationName = Release;
+		};
 		BEF971BB301DE883004BDE78 /* Build configuration list for PBXProject "RunTogether" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
